@@ -1,14 +1,25 @@
 <%- include("partials/header") -%>
     <div class="compose-section">
         <h1 class="page-title">Compose New Post</h1>
+        
+        <% if (locals.errorMessage) { %>
+        <div class="alert alert-danger">
+            <%= errorMessage %>
+        </div>
+        <% } %>
+        
         <form action="/compose" method="POST" class="compose-form">
             <div class="form-group">
                 <label for="postTitle">Title</label>
-                <input type="text" id="postTitle" name="postTitle" class="form-control" placeholder="Enter post title" required>
+                <input type="text" id="postTitle" name="postTitle" class="form-control" 
+                       placeholder="Enter post title" required 
+                       value="<%= locals.postTitle || '' %>">
             </div>
             <div class="form-group">
                 <label for="postContent">Content</label>
-                <textarea id="postContent" name="postContent" class="form-control" placeholder="Write your post content here..." rows="12" required></textarea>
+                <textarea id="postContent" name="postContent" class="form-control" 
+                          placeholder="Write your post content here..." rows="12" 
+                          required><%= locals.postContent || '' %></textarea>
             </div>
             <div class="button-group">
                 <button type="submit" class="btn btn-primary">Publish Post</button>
